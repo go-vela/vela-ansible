@@ -1,4 +1,4 @@
-# vela-email
+# vela-ansible
 
 [![license](https://img.shields.io/crates/l/gl.svg)](../LICENSE)
 

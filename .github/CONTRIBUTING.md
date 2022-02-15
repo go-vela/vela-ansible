@@ -34,21 +34,21 @@ We are always open to new PRs! You can follow the below guide for learning how y
 
 ```bash
 # Clone the project
-git clone git@github.com:go-vela/vela-email.git $HOME/go-vela/vela-email
+git clone git@github.com:go-vela/vela-ansible.git $HOME/go-vela/vela-ansible
 ```
 
 - Navigate to the repository code:
 
 ```bash
 # Change into the project directory
-cd $HOME/go-vela/vela-email
+cd $HOME/go-vela/vela-ansible
 ```
 
 - Point the original code at your fork:
 
 ```bash
 # Add a remote branch pointing to your fork
-git remote add fork https://github.com/your_fork/vela-email
+git remote add fork https://github.com/your_fork/vela-ansible
 ```
 
 ### Development
@@ -59,7 +59,7 @@ git remote add fork https://github.com/your_fork/vela-email
 
 ```bash
 # change into the cloned project directory
-cd $HOME/go-vela/vela-email
+cd $HOME/go-vela/vela-ansible
 ```
 
 - Write your code and tests to implement the changes you desire.

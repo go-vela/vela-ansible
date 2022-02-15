@@ -4,12 +4,66 @@
 package main
 
 import (
+	"errors"
+	"fmt"
+	"os"
+	"strings"
 	"testing"
 
 	"github.com/go-vela/vela-ansible/action/lint"
 	"github.com/go-vela/vela-ansible/action/playbook"
 )
 
+const (
+	testMainEnvVar        = "env-var"
+	testMainSuccessOutput = "success-output"
+	testMainFailOutput    = "fail-output"
+)
+
+// TestMain is used so that we can mock calls to binaries that need
+// to return specific output, or errors, exit codes, etc.
+func TestMain(m *testing.M) {
+    switch os.Getenv("GO_MAIN_TEST_CASE") {
+	case "":
+		os.Exit(m.Run())
+	case testMainEnvVar:
+		if strings.Contains(strings.Join(os.Args, ""), "$") {
+			os.Exit(1)
+		}
+		os.Exit(0)
+	case testMainSuccessOutput:
+		if len(os.Args) != 4 {
+			fmt.Printf("invalid os.Args: %s", strings.Join(os.Args, " "))
+			os.Exit(2)
+		}
+		fmt.Println(os.Args[2])
+		fmt.Fprint(os.Stderr, os.Args[3])
+		os.Exit(0)
+	case testMainFailOutput:
+		if len(os.Args) != 4 {
+			fmt.Printf("invalid os.Args: %s", strings.Join(os.Args, " "))
+			os.Exit(3)
+		}
+		fmt.Println(os.Args[2])
+		fmt.Fprint(os.Stderr, os.Args[3])
+		os.Exit(4)
+	}
+}
+
+type mockExecConfig struct {
+	validationError string
+	binaryPath      string
+	arguments       []string
+	environment     map[string]string
+}
+
+func (m *mockExecConfig) Validate() error {
+	if m.validationError != "" {
+		return errors.New(m.validationError)
+	}
+
+	return nil
+}
 func TestPluginValidateSuccess(t *testing.T) {
 	tests := []struct {
 		plugin *Plugin
