@@ -1,0 +1,11 @@
+---
+
+- name: main
+  vars_files:
+    - vars/vars.yml
+  hosts: all
+  roles:
+    - aptitude
+    - systempackage
+    - docker
+    - container
