@@ -19,12 +19,13 @@ func Exec(p *Playbook) error {
 
 	// sets ansible-playbook flags
 	cmd := setFlags(p)
-	
+
 	logrus.Info("ansible-playbook: running")
 	// execute ansible-playbook cli
 	if err := execCmd(cmd); err != nil {
 		return err
 	}
+
 	logrus.Info("ansible-playbook: complete")
 
 	return nil

@@ -47,11 +47,13 @@ func Validate(p *Playbook) error {
 
 	// validate playbook
 	logrus.Info("validating ansible-playbook")
+
 	if len(p.Playbook) != 0 {
 		file, err := os.Stat(p.Playbook)
 		if err != nil {
 			return ErrorInvalidPlaybook
 		}
+
 		if file.Size() == 0 {
 			return ErrorEmptyPlaybook
 		}
@@ -67,6 +69,7 @@ func Validate(p *Playbook) error {
 				if err != nil {
 					return ErrorInvalidInventory
 				}
+
 				if file.Size() == 0 {
 					return ErrorEmptyInventory
 				}
