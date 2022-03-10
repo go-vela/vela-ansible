@@ -28,6 +28,7 @@ func TestExec(t *testing.T) {
 			if err == nil {
 				t.Errorf("Flags should have returned err")
 			}
+
 			continue
 		}
 

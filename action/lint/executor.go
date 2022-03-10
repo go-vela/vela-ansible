@@ -25,6 +25,7 @@ func Exec(l *Linter) error {
 	if err := execCmd(cmd); err != nil {
 		return err
 	}
+
 	logrus.Info("ansible-lint: complete")
 
 	return nil

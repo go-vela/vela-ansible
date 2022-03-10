@@ -37,11 +37,13 @@ func Validate(l *Linter) error {
 
 	// check for valid playbook
 	logrus.Info("validating ansible-lint")
+
 	if len(l.LintPlaybook) != 0 {
 		file, err := os.Stat(l.LintPlaybook)
 		if err != nil {
 			return ErrorInvalidLintPlaybook
 		}
+
 		if file.Size() == 0 {
 			return ErrorEmptyLintPlaybook
 		}

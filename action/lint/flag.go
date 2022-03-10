@@ -13,7 +13,6 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-// nolint:funlen // false positive
 // Command creates the command line with flags to run ansible-lint.
 func setFlags(l *Linter) *exec.Cmd {
 	logrus.Trace("entered plugin.lint.setFlags")
@@ -116,7 +115,7 @@ func setFlags(l *Linter) *exec.Cmd {
 	}
 
 	logrus.Info("ansible-lint: command created")
-	
+
 	// ansible-lint cli
 	return exec.Command(lint, flags...)
 }

@@ -40,6 +40,7 @@ func TestExec(t *testing.T) {
 			if err == nil {
 				t.Errorf("setFlags should have returned err")
 			}
+
 			continue
 		}
 

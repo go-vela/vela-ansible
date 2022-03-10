@@ -68,11 +68,13 @@ func (p *Plugin) Exec() error {
 	switch strings.ToLower(p.action) {
 	case AnsibleLint:
 		logrus.Info("ansible-lint")
+
 		if err := lint.Exec(p.Lint); err != nil {
 			return err
 		}
 	case AnsiblePlaybook:
 		logrus.Info("ansible-playbook")
+
 		if err := playbook.Exec(p.Playbook); err != nil {
 			return err
 		}

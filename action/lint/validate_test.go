@@ -5,6 +5,7 @@
 package lint
 
 import (
+	"errors"
 	"testing"
 )
 
@@ -75,7 +76,7 @@ func TestValidateError(t *testing.T) {
 			t.Errorf("should have returned err")
 		}
 
-		if err != test.wantErr {
+		if !errors.Is(err, test.wantErr) {
 			t.Errorf("Should have returned error: %v, instead got error: %v", test.wantErr, err)
 		}
 	}
