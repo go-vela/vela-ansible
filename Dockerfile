@@ -8,7 +8,7 @@
 
 FROM alpine:latest
 
-ENV ANSIBLE_VERSION 2.9.12
+ENV ANSIBLE_VERSION 6.2.0
 
 RUN apk --update --no-cache add \
         git \
