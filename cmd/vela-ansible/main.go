@@ -98,7 +98,7 @@ func run(c *cli.Context) error {
 
 	logrus.WithFields(logrus.Fields{
 		"code":     "https://github.com/go-vela/vela-ansible",
-		"docs":     "https://go-vela.github.io/docs/plugins/registry/ansible/",
+		"docs":     "https://go-vela.github.io/docs/plugins/registry/pipeline/ansible/",
 		"registry": "https://hub.docker.com/r/target/vela-ansible",
 	}).Info("Vela Ansible Plugin")
 
