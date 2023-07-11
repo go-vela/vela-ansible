@@ -6,7 +6,7 @@ require (
 	github.com/Masterminds/semver/v3 v3.2.1
 	github.com/go-vela/types v0.17.0
 	github.com/sirupsen/logrus v1.9.0
-	github.com/urfave/cli/v2 v2.17.1
+	github.com/urfave/cli/v2 v2.25.7
 )
 
 require (
