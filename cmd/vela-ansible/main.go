@@ -1,6 +1,4 @@
-// Copyright (c) 2023 Target Brands, Inc. All rights reserved.
-//
-// Use of this source code is governed by the LICENSE file in this repository.
+// SPDX-License-Identifier: Apache-2.0
 
 package main
 
@@ -35,7 +33,7 @@ func main() {
 		Name:      "vela-ansible",
 		HelpName:  "vela-ansible",
 		Usage:     "Vela Ansible Plugin for running ansible-playbook and ansible-lint.",
-		Copyright: "Copyright (c) 2023 Target Brands, Inc. All rights reserved.",
+		Copyright: "Copyright 2022 Target Brands, Inc. All rights reserved.",
 		Authors: []*cli.Author{
 			{
 				Name:  "Vela Admins",
