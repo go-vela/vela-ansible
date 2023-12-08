@@ -25,12 +25,12 @@ RUN apk --update add --virtual \
 
 RUN pip3 install --upgrade \
         pip \
-        cffi
+        cffi --break-system-packages
 
 RUN pip3 install \
         wheel \
         ansible==${ANSIBLE_VERSION} \
-        ansible-lint
+        ansible-lint --break-system-packages
 
 RUN apk del \
         .build-deps
