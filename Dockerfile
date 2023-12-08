@@ -4,7 +4,7 @@
 ##    docker build --no-cache -t vela-ansible:local .    ##
 #########################################################
 
-FROM alpine:latest
+FROM alpine:latest@sha256:51b67269f354137895d43f3b3d810bfacd3945438e94dc5ac55fdac340352f48
 
 ENV ANSIBLE_VERSION 6.2.0
 
