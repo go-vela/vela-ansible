@@ -11,8 +11,9 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-// nolint: funlen, gocyclo // ignore statements for flags
 // setFlags creates the command line with flags to run ansible-playbook.
+//
+//nolint:funlen, gocyclo // ignore statements for flags
 func setFlags(p *Playbook) *exec.Cmd {
 	logrus.Trace("entered plugin.playbook.setFlags")
 	defer logrus.Trace("exited plugin.playbook.setFlags")
