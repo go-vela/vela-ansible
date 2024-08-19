@@ -27,8 +27,8 @@ steps:
       action: lint
       playbook: "abox/main.yml"
       lint_skip:
-        - 403
-        - 201
+        - no-changed-when
+        - key-order
 
   - name: ansible-playbook
     image: target/vela-ansible:latest
