@@ -6,7 +6,7 @@
 
 FROM alpine:latest@sha256:0a4eaa0eecf5f8c050e5bba433f58c052be7587ee8af3e8b3910ef9ab5fbe9f5
 
-ENV ANSIBLE_VERSION 6.2.0
+ENV ANSIBLE_VERSION=11.2.0
 
 RUN apk --update --no-cache add \
         git \
@@ -39,7 +39,7 @@ RUN rm -rf /var/cache/apk/*
 
 COPY release/vela-ansible /bin/vela-ansible
 
-ENV ANSIBLE_HOST_KEY_CHECKING false
-ENV StrictHostKeyChecking no
+ENV ANSIBLE_HOST_KEY_CHECKING=false
+ENV StrictHostKeyChecking=no
 
 ENTRYPOINT ["/bin/vela-ansible"]
