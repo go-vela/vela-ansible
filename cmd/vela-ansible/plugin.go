@@ -8,9 +8,10 @@ import (
 	"errors"
 	"strings"
 
+	"github.com/sirupsen/logrus"
+
 	"github.com/go-vela/vela-ansible/action/lint"
 	"github.com/go-vela/vela-ansible/action/playbook"
-	"github.com/sirupsen/logrus"
 )
 
 // action constants.
