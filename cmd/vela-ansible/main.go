@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/sirupsen/logrus"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 
 	"github.com/go-vela/vela-ansible/action/lint"
 	"github.com/go-vela/vela-ansible/action/playbook"
