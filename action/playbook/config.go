@@ -5,7 +5,7 @@
 package playbook
 
 import (
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 )
 
 // apply Playbook configuration.
