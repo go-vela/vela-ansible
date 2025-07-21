@@ -5,7 +5,7 @@
 package lint
 
 import (
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 )
 
 const (
@@ -45,143 +45,143 @@ type (
 var Flags = []cli.Flag{
 	// ansible-lint flags
 	&cli.BoolFlag{
-		EnvVars: []string{"PARAMETER_LINT_VERSION", "LINT_VERSION"},
 		Name:    "lint.version",
 		Usage:   "ansible-lint version",
+		Sources: cli.EnvVars("PARAMETER_LINT_VERSION", "LINT_VERSION"),
 	},
 
 	&cli.BoolFlag{
-		EnvVars: []string{"PARAMETER_LINT_LIST", "LINT_LIST"},
 		Name:    "lint.list",
 		Usage:   "list all the rules",
+		Sources: cli.EnvVars("PARAMETER_LINT_LIST", "LINT_LIST"),
 	},
 
 	&cli.StringFlag{
-		EnvVars: []string{"PARAMETER_LINT_FORMAT", "LINT_FORMAT"},
-		Name:    "lint.format",
+		Name: "lint.format",
 		Usage: "format used rules output, (default: rich) options: " +
 			"{rich,plain,rst,codeclimate,quiet,pep8}",
+		Sources: cli.EnvVars("PARAMETER_LINT_FORMAT", "LINT_FORMAT"),
 	},
 
 	&cli.BoolFlag{
-		EnvVars: []string{"PARAMETER_LINT_QUIETER", "LINT_QUIETER"},
 		Name:    "lint.quieter",
 		Usage:   "quieter, although not silent output",
+		Sources: cli.EnvVars("PARAMETER_LINT_QUIETER", "LINT_QUIETER"),
 	},
 
 	&cli.BoolFlag{
-		EnvVars: []string{"PARAMETER_LINT_PARSEABLE", "LINT_PARSEABLE"},
 		Name:    "lint.parseable",
 		Usage:   "parseable output in the format of pep8",
+		Sources: cli.EnvVars("PARAMETER_LINT_PARSEABLE", "LINT_PARSEABLE"),
 	},
 
 	&cli.BoolFlag{
-		EnvVars: []string{"PARAMETER_LINT_PARSEABLESEVERITY", "LINT_PARSEABLESEVERITY"},
 		Name:    "lint.parseable.severity",
 		Usage:   "parseable output including severity of rule",
+		Sources: cli.EnvVars("PARAMETER_LINT_PARSEABLESEVERITY", "LINT_PARSEABLESEVERITY"),
 	},
 
 	&cli.BoolFlag{
-		EnvVars: []string{"PARAMETER_LINT_PROGRESSIVE", "LINT_PROGRESSIVE"},
-		Name:    "lint.progressive",
+		Name: "lint.progressive",
 		Usage: " Return success if it detects a reduction in number of " +
 			"violations compared with previous git commit. This " +
 			"feature works only in git repositories.",
+		Sources: cli.EnvVars("PARAMETER_LINT_PROGRESSIVE", "LINT_PROGRESSIVE"),
 	},
 
 	&cli.StringFlag{
-		EnvVars: []string{"PARAMETER_LINT_PROJECTDIR", "LINT_PROJECTDIR"},
-		Name:    "lint.project.dir",
+		Name: "lint.project.dir",
 		Usage: " Location of project/repository, autodetected based on " +
 			"location of configuration file.",
+		Sources: cli.EnvVars("PARAMETER_LINT_PROJECTDIR", "LINT_PROJECTDIR"),
 	},
 
 	&cli.StringFlag{
-		EnvVars: []string{"PARAMETER_LINT_RULE", "LINT_RULE"},
-		Name:    "lint.rules",
+		Name: "lint.rules",
 		Usage: "specify one or more rules directories using one or more -r arguments. " +
 			"Any -r flags overridethe default rules in /path/to/ansible-lint/lib/ansiblelint/rules," +
 			" unless -R is also used.",
+		Sources: cli.EnvVars("PARAMETER_LINT_RULE", "LINT_RULE"),
 	},
 
 	&cli.BoolFlag{
-		EnvVars: []string{"PARAMETER_LINT_RULESDEFAULT", "LINT_RULESDEFAULT"},
-		Name:    "lint.rules.default",
+		Name: "lint.rules.default",
 		Usage: "use default rules in /path/to/ansible-lint/lib/ansiblelint/rules in addition" +
 			" to any extra rules directories specified with -r. There is no need to specify this if no" +
 			" -r flags are used",
+		Sources: cli.EnvVars("PARAMETER_LINT_RULESDEFAULT", "LINT_RULESDEFAULT"),
 	},
 
 	&cli.BoolFlag{
-		EnvVars: []string{"PARAMETER_LINT_SHOWRELATIVEPATH", "LINT_SHOWRELATIVEPATH"},
 		Name:    "lint.show.relative.path",
 		Usage:   "display path relative to CWD",
+		Sources: cli.EnvVars("PARAMETER_LINT_SHOWRELATIVEPATH", "LINT_SHOWRELATIVEPATH"),
 	},
 
 	&cli.StringSliceFlag{
-		EnvVars: []string{"PARAMETER_LINT_TAGS", "LINT_TAGS"},
 		Name:    "lint.tags",
 		Usage:   "only check rules whose id/tags match these values",
+		Sources: cli.EnvVars("PARAMETER_LINT_TAGS", "LINT_TAGS"),
 	},
 
 	&cli.BoolFlag{
-		EnvVars: []string{"PARAMETER_LINT_TAGSLIST", "LINT_TAGSLIST"},
 		Name:    "lint.tags.list",
 		Usage:   "list all the tags",
+		Sources: cli.EnvVars("PARAMETER_LINT_TAGSLIST", "LINT_TAGSLIST"),
 	},
 
 	&cli.BoolFlag{
-		EnvVars: []string{"PARAMETER_LINT_VERBOSE", "LINT_VERBOSE"},
 		Name:    "lint.verbose",
 		Usage:   "increase verbosity level",
+		Sources: cli.EnvVars("PARAMETER_LINT_VERBOSE", "LINT_VERBOSE"),
 	},
 
 	&cli.StringSliceFlag{
-		EnvVars: []string{"PARAMETER_LINT_SKIP", "LINT_SKIP"},
 		Name:    "lint.skip",
 		Usage:   "only check rules whose id/tags do not match these values",
+		Sources: cli.EnvVars("PARAMETER_LINT_SKIP", "LINT_SKIP"),
 	},
 
 	&cli.StringSliceFlag{
-		EnvVars: []string{"PARAMETER_LINT_WARN", "LINT_WARN"},
-		Name:    "lint.warn",
+		Name: "lint.warn",
 		Usage: "only warn about these rules, unless overridden in " +
 			"config file defaults to 'experimental'",
+		Sources: cli.EnvVars("PARAMETER_LINT_WARN", "LINT_WARN"),
 	},
 
 	&cli.StringSliceFlag{
-		EnvVars: []string{"PARAMETER_LINT_ENABLE", "LINT_ENABLE"},
 		Name:    "lint.enable",
 		Usage:   "activate optional rules by their tag name",
+		Sources: cli.EnvVars("PARAMETER_LINT_ENABLE", "LINT_ENABLE"),
 	},
 
 	&cli.BoolFlag{
-		EnvVars: []string{"PARAMETER_LINT_NOCOLOR", "LINT_NOCOLOR"},
 		Name:    "lint.no.color",
 		Usage:   "disable colored output",
+		Sources: cli.EnvVars("PARAMETER_LINT_NOCOLOR", "LINT_NOCOLOR"),
 	},
 
 	&cli.BoolFlag{
-		EnvVars: []string{"PARAMETER_LINT_FORCECOLOR", "LINT_FORCECOLOR"},
 		Name:    "lint.force.color",
 		Usage:   "try force colored output (relying on ansible's code)",
+		Sources: cli.EnvVars("PARAMETER_LINT_FORCECOLOR", "LINT_FORCECOLOR"),
 	},
 
 	&cli.StringSliceFlag{
-		EnvVars: []string{"PARAMETER_LINT_EXCLUDE", "LINT_EXCLUDE"},
 		Name:    "lint.exclude",
 		Usage:   "path to directories or files to skip. this option is repeatable",
+		Sources: cli.EnvVars("PARAMETER_LINT_EXCLUDE", "LINT_EXCLUDE"),
 	},
 
 	&cli.StringFlag{
-		EnvVars: []string{"PARAMETER_LINT_CONFIG", "LINT_CONFIG"},
 		Name:    "lint.config",
 		Usage:   "specify configuration file to use. defaults to \".ansible-lint\"",
+		Sources: cli.EnvVars("PARAMETER_LINT_CONFIG", "LINT_CONFIG"),
 	},
 
 	&cli.BoolFlag{
-		EnvVars: []string{"PARAMETER_LINT_OFFLINE", "LINT_OFFLINE"},
 		Name:    "lint.offline",
 		Usage:   "Disable installation of requirements.yml",
+		Sources: cli.EnvVars("PARAMETER_LINT_OFFLINE", "LINT_OFFLINE"),
 	},
 }

@@ -5,11 +5,11 @@
 package playbook
 
 import (
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 )
 
 // apply Playbook configuration.
-func Config(c *cli.Context) *Playbook {
+func Config(c *cli.Command) *Playbook {
 	return &Playbook{
 		// playbook
 		Playbook: c.String("playbook"),
