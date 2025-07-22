@@ -5,11 +5,11 @@
 package lint
 
 import (
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 )
 
 // apply Linter configuration.
-func Config(c *cli.Context) *Linter {
+func Config(c *cli.Command) *Linter {
 	// lint configuration
 	return &Linter{
 		LintPlaybook:          c.String("playbook"),
