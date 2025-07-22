@@ -177,7 +177,6 @@ func TestPluginValidateError(t *testing.T) {
 
 	for _, test := range tests {
 		err := test.plugin.Validate()
-
 		if err == nil {
 			t.Errorf("should have returned err")
 		}
@@ -209,7 +208,6 @@ func TestPluginExecError(t *testing.T) {
 
 	for _, test := range tests {
 		err := test.plugin.Exec()
-
 		if err == nil {
 			t.Errorf("should have returned err")
 		}

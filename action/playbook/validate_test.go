@@ -134,7 +134,6 @@ func TestValidateError(t *testing.T) {
 
 	for _, test := range tests {
 		err := Validate(test.playbook)
-
 		if err == nil {
 			t.Errorf("should have returned err")
 		}
