@@ -5,6 +5,7 @@
 package lint
 
 import (
+	"context"
 	"os/exec"
 	"strings"
 
@@ -12,7 +13,7 @@ import (
 )
 
 // Command creates the command line with flags to run ansible-lint.
-func setFlags(l *Linter) *exec.Cmd {
+func setFlags(ctx context.Context, l *Linter) *exec.Cmd {
 	logrus.Trace("entered plugin.lint.setFlags")
 	defer logrus.Trace("exited plugin.lint.setFlags")
 
@@ -20,7 +21,7 @@ func setFlags(l *Linter) *exec.Cmd {
 
 	if l.LintVersion {
 		logrus.Info("ansible-lint: command created")
-		return exec.Command(lint, "--version")
+		return exec.CommandContext(ctx, lint, "--version")
 	}
 
 	// check if lint.playbook is provided
@@ -115,5 +116,5 @@ func setFlags(l *Linter) *exec.Cmd {
 	logrus.Info("ansible-lint: command created")
 
 	// ansible-lint cli
-	return exec.Command(lint, flags...)
+	return exec.CommandContext(ctx, lint, flags...)
 }

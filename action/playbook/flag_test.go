@@ -3,8 +3,8 @@
 package playbook
 
 import (
+	"context"
 	"os/exec"
-	"reflect"
 	"testing"
 )
 
@@ -36,7 +36,7 @@ func TestSetFlags(t *testing.T) {
 				Connection: &Connection{},
 				Privilege:  &Privilege{},
 			},
-			expected: exec.Command(playbook, "testdata/main.yml", "--ask-vault-pass",
+			expected: exec.CommandContext(context.Background(), playbook, "testdata/main.yml", "--ask-vault-pass",
 				"--flush-cache", "--force-handlers", "--list-hosts", "--list-tasks",
 				"--skip-tags", "security,metadata", "--start-at-task", "yaml", "--step",
 				"--syntax-check", "--vault-id", "hey", "--vault-password-file", "test/pass",
@@ -59,7 +59,7 @@ func TestSetFlags(t *testing.T) {
 				Connection: &Connection{},
 				Privilege:  &Privilege{},
 			},
-			expected: exec.Command(playbook, "testdata/main.yml", "--extra-vars", "ansible_config=config",
+			expected: exec.CommandContext(context.Background(), playbook, "testdata/main.yml", "--extra-vars", "ansible_config=config",
 				"--forks", "4", "--inventory", "10.10.10.10, 10.10.10.11", "--limit", "pattern",
 				"--tags", "tag1,tag2", "--verbose", "-vvv", "-vvvv"),
 		},
@@ -83,7 +83,7 @@ func TestSetFlags(t *testing.T) {
 				},
 				Privilege: &Privilege{},
 			},
-			expected: exec.Command(playbook, "testdata/main.yml", "--inventory",
+			expected: exec.CommandContext(context.Background(), playbook, "testdata/main.yml", "--inventory",
 				"10.10.10.10, 10.10.10.11", "--private-key", "privkey", "--scp-extra-args",
 				"-l", "--sftp-extra-args", "-f,-l", "--ssh-common-args", "ProxyCommand",
 				"--ssh-extra-args", "-R", "--timeout", "9", "--connection", "smart",
@@ -104,7 +104,7 @@ func TestSetFlags(t *testing.T) {
 					Become:             true,
 				},
 			},
-			expected: exec.Command(playbook, "testdata/main.yml", "--inventory",
+			expected: exec.CommandContext(context.Background(), playbook, "testdata/main.yml", "--inventory",
 				"10.10.10.10, 10.10.10.11", "--become-method", "sudo", "--become-user",
 				"root", "--ask-become-pass", "--become-password-file", "passfile",
 				"--become"),
@@ -118,15 +118,25 @@ func TestSetFlags(t *testing.T) {
 				Connection: &Connection{},
 				Privilege:  &Privilege{},
 			},
-			expected: exec.Command(playbook, "--version"),
+			expected: exec.CommandContext(context.Background(), playbook, "--version"),
 		},
 	}
 
 	for _, test := range tests {
-		command := setFlags(test.playbook)
+		command := setFlags(context.Background(), test.playbook)
 
-		if !reflect.DeepEqual(command, test.expected) {
-			t.Errorf("Command is \n %v,  \n want %v", command, test.expected)
+		if command.Path != test.expected.Path {
+			t.Errorf("Command path is %v, want %v", command.Path, test.expected.Path)
+		}
+
+		if len(command.Args) != len(test.expected.Args) {
+			t.Errorf("Command args length is %d, want %d", len(command.Args), len(test.expected.Args))
+		}
+
+		for i, arg := range command.Args {
+			if i < len(test.expected.Args) && arg != test.expected.Args[i] {
+				t.Errorf("Command arg[%d] is %v, want %v", i, arg, test.expected.Args[i])
+			}
 		}
 	}
 }

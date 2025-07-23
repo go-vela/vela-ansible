@@ -3,12 +3,13 @@
 package lint
 
 import (
+	"context"
 	"os/exec"
 	"testing"
 )
 
 func TestCommand_AnsibleLint_Valid(t *testing.T) {
-	e := exec.Command("echo", "hello")
+	e := exec.CommandContext(context.Background(), "echo", "hello")
 
 	err := execCmd(e)
 	if err != nil {

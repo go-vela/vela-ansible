@@ -114,5 +114,5 @@ func run(ctx context.Context, cmd *cli.Command) error {
 	}
 
 	// execute the plugin
-	return p.Exec()
+	return p.Exec(ctx)
 }
