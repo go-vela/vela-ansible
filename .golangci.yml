@@ -47,13 +47,13 @@ linters:
     - nolintlint # reports ill-formed or insufficient nolint directives
     - revive # linter for go
     - staticcheck # applies static analysis checks, go vet on steroids
-      # The linters stylecheck, gosimple, and staticcheck has been merged inside the staticcheck.
+    # The linters stylecheck, gosimple, and staticcheck has been merged inside the staticcheck.
     - tagalign # finds maligned struct tags
     - unconvert # remove unnecessary type conversions
     - unparam # reports unused function parameters
     - unused # checks for unused constants, variables, functions and types
     - whitespace # detects leading and trailing whitespace
-    - wsl_v5 # forces code to use empty lines
+    - wsl # forces code to use empty lines
 
   # static list of linters we know golangci can run but we've
   # chosen to leave disabled for now
@@ -141,11 +141,6 @@ linters:
         - '-QF1003'
         - '-QF1004'
         - '-QF1008'
-    # https://golangci-lint.run/usage/linters/#wsl
-    wsl_v5:
-      allow-first-in-block: true
-      allow-whole-block: false
-      branch-max-lines: 2
   exclusions:
     generated: lax
     presets:
