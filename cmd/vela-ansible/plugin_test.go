@@ -2,6 +2,7 @@
 package main
 
 import (
+	"context"
 	"errors"
 	"testing"
 
@@ -207,7 +208,7 @@ func TestPluginExecError(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		err := test.plugin.Exec()
+		err := test.plugin.Exec(context.Background())
 		if err == nil {
 			t.Errorf("should have returned err")
 		}

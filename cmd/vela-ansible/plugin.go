@@ -5,6 +5,7 @@
 package main
 
 import (
+	"context"
 	"errors"
 	"strings"
 
@@ -58,7 +59,7 @@ func (p *Plugin) Validate() error {
 }
 
 // Exec configs and runs ansible plugin.
-func (p *Plugin) Exec() error {
+func (p *Plugin) Exec(ctx context.Context) error {
 	logrus.Trace("entered plugin.Exec")
 	defer logrus.Trace("exited plugin.Exec")
 
@@ -68,13 +69,13 @@ func (p *Plugin) Exec() error {
 	case AnsibleLint:
 		logrus.Info("ansible-lint")
 
-		if err := lint.Exec(p.Lint); err != nil {
+		if err := lint.Exec(ctx, p.Lint); err != nil {
 			return err
 		}
 	case AnsiblePlaybook:
 		logrus.Info("ansible-playbook")
 
-		if err := playbook.Exec(p.Playbook); err != nil {
+		if err := playbook.Exec(ctx, p.Playbook); err != nil {
 			return err
 		}
 	default:

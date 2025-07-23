@@ -16,6 +16,11 @@ output:
       print-linter-name: true
       # print lines of code with issue, default is true
       print-issued-lines: true
+linters-settings:
+  wsl_v5:
+    allow-first-in-block: true
+    allow-whole-block: false
+    branch-max-lines: 2
 linters:
   # disable all linters as new linters might be added to golangci
   # in v2, this is for disable-all: true
@@ -53,7 +58,7 @@ linters:
     - unparam # reports unused function parameters
     - unused # checks for unused constants, variables, functions and types
     - whitespace # detects leading and trailing whitespace
-    - wsl # forces code to use empty lines
+    - wsl_v5 # forces code to use empty lines
 
   # static list of linters we know golangci can run but we've
   # chosen to leave disabled for now
@@ -155,7 +160,7 @@ linters:
           - funlen
           - goconst
           - gocyclo
-          - wsl
+          - wsl_v5
         path: _test\.go
     paths:
       - third_party$
