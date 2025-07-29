@@ -3,13 +3,12 @@
 package playbook
 
 import (
-	"context"
 	"os/exec"
 	"testing"
 )
 
 func TestCommand_AnsiblePlaybook_Valid(t *testing.T) {
-	e := exec.CommandContext(context.Background(), "echo", "hello")
+	e := exec.CommandContext(t.Context(), "echo", "hello")
 
 	err := execCmd(e)
 	if err != nil {

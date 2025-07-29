@@ -3,7 +3,6 @@
 package playbook
 
 import (
-	"context"
 	"testing"
 )
 
@@ -33,7 +32,7 @@ func TestExec(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		err := Exec(context.Background(), test.playbook)
+		err := Exec(t.Context(), test.playbook)
 
 		if test.failure {
 			if err == nil {
