@@ -3,7 +3,6 @@
 package lint
 
 import (
-	"context"
 	"os/exec"
 	"testing"
 )
@@ -30,7 +29,7 @@ func TestSetFlags(t *testing.T) {
 				LintTagsList:          true,
 				LintForceColor:        true,
 			},
-			expected: exec.CommandContext(context.Background(), lint, "testdata/main.yml",
+			expected: exec.CommandContext(t.Context(), lint, "testdata/main.yml",
 				"-L", "-f", "plain", "-q", "-p", "--parseable-severity",
 				"--progressive", "--project-dir", "vela-ansible/", "-r",
 				"no-tabs,yaml,role-name", "-R", "--show-relpath", "-t",
@@ -48,7 +47,7 @@ func TestSetFlags(t *testing.T) {
 				LintConfig:   ".ansible-lint",
 				LintOffline:  true,
 			},
-			expected: exec.CommandContext(context.Background(), lint, "testdata/main.yml", "-v", "-x",
+			expected: exec.CommandContext(t.Context(), lint, "testdata/main.yml", "-v", "-x",
 				"security", "-w", "experimental,metadata", "--enable-list",
 				"no-tabs", "--nocolor", "--exclude", "/path1/,testdata/path2/",
 				"-c", ".ansible-lint", "--offline"),
@@ -60,12 +59,12 @@ func TestSetFlags(t *testing.T) {
 				LintList:     true,
 				LintQuieter:  true,
 			},
-			expected: exec.CommandContext(context.Background(), lint, "--version"),
+			expected: exec.CommandContext(t.Context(), lint, "--version"),
 		},
 	}
 
 	for _, test := range tests {
-		command := setFlags(context.Background(), test.lint)
+		command := setFlags(t.Context(), test.lint)
 
 		if command.Path != test.expected.Path {
 			t.Errorf("Command path is %v, want %v", command.Path, test.expected.Path)

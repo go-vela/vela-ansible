@@ -3,7 +3,6 @@
 package lint
 
 import (
-	"context"
 	"testing"
 )
 
@@ -21,7 +20,7 @@ func TestExec(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		err := Exec(context.Background(), test.lint)
+		err := Exec(t.Context(), test.lint)
 
 		if test.failure {
 			if err == nil {
