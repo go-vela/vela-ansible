@@ -5,18 +5,20 @@
 package lint
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 )
 
 // Exec runs ansible-lint with given flags.
-func Exec(l *Linter) error {
+func Exec(ctx context.Context, l *Linter) error {
 	logrus.Trace("entered plugin.lint.Exec")
 	defer logrus.Trace("exited plugin.lint.Exec")
 
 	logrus.Debug("running ansible-lint with provided configuration")
 
 	// sets ansible-lint flags
-	cmd := setFlags(l)
+	cmd := setFlags(ctx, l)
 
 	logrus.Info("ansible-lint: running")
 	// execute ansible-lint cli

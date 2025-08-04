@@ -32,7 +32,7 @@ func TestExec(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		err := Exec(test.playbook)
+		err := Exec(t.Context(), test.playbook)
 
 		if test.failure {
 			if err == nil {

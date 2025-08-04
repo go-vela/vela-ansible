@@ -6,6 +6,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"net/mail"
 	"os"
 	"strings"
 
@@ -35,22 +36,25 @@ func main() {
 		Usage:     "Vela Ansible Plugin for running ansible-playbook and ansible-lint.",
 		Copyright: "Copyright 2022 Target Brands, Inc. All rights reserved.",
 		Authors: []any{
-			"Vela Admins <vela@target.com>",
+			&mail.Address{
+				Name:    "Vela Admins",
+				Address: "vela@target.com",
+			},
 		},
 		Action:  run,
 		Version: pluginVersion.Semantic(),
 		Flags: []cli.Flag{
 			&cli.StringFlag{
 				Name:    "log.level",
-				Usage:   "set log level - options: (trace|debug|info|warn|error|fatal|panic)",
 				Value:   "info",
+				Usage:   "set log level - options: (trace|debug|info|warn|error|fatal|panic)",
 				Sources: cli.EnvVars("PARAMETER_LOG_LEVEL", "VELA_LOG_LEVEL"),
 			},
 
 			&cli.StringFlag{
 				Name:    "action",
-				Usage:   "set plugin action - options: (lint|playbook)",
 				Value:   "lint",
+				Usage:   "set plugin action - options: (lint|playbook)",
 				Sources: cli.EnvVars("PARAMETER_ACTION", "ANSIBLE_ACTION"),
 			},
 		},
@@ -114,5 +118,5 @@ func run(ctx context.Context, cmd *cli.Command) error {
 	}
 
 	// execute the plugin
-	return p.Exec()
+	return p.Exec(ctx)
 }

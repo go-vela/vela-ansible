@@ -5,18 +5,20 @@
 package playbook
 
 import (
+	"context"
+
 	"github.com/sirupsen/logrus"
 )
 
 // Exec runs ansible-playbook with given flags.
-func Exec(p *Playbook) error {
+func Exec(ctx context.Context, p *Playbook) error {
 	logrus.Trace("entered plugin.playbook.Exec")
 	defer logrus.Trace("exited plugin.playbook.Exec")
 
 	logrus.Debug("running ansible-playbook with provided configuration")
 
 	// sets ansible-playbook flags
-	cmd := setFlags(p)
+	cmd := setFlags(ctx, p)
 
 	logrus.Info("ansible-playbook: running")
 	// execute ansible-playbook cli

@@ -20,7 +20,7 @@ func TestExec(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		err := Exec(test.lint)
+		err := Exec(t.Context(), test.lint)
 
 		if test.failure {
 			if err == nil {

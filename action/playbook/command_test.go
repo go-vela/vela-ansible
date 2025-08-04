@@ -8,7 +8,7 @@ import (
 )
 
 func TestCommand_AnsiblePlaybook_Valid(t *testing.T) {
-	e := exec.Command("echo", "hello")
+	e := exec.CommandContext(t.Context(), "echo", "hello")
 
 	err := execCmd(e)
 	if err != nil {

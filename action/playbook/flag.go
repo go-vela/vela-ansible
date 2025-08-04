@@ -5,6 +5,7 @@
 package playbook
 
 import (
+	"context"
 	"os/exec"
 	"strings"
 
@@ -14,7 +15,7 @@ import (
 // setFlags creates the command line with flags to run ansible-playbook.
 //
 //nolint:funlen, gocyclo // ignore statements for flags
-func setFlags(p *Playbook) *exec.Cmd {
+func setFlags(ctx context.Context, p *Playbook) *exec.Cmd {
 	logrus.Trace("entered plugin.playbook.setFlags")
 	defer logrus.Trace("exited plugin.playbook.setFlags")
 
@@ -22,7 +23,7 @@ func setFlags(p *Playbook) *exec.Cmd {
 
 	if p.Options.Version {
 		logrus.Info("ansible-playbook: command created")
-		return exec.Command(playbook, "--version")
+		return exec.CommandContext(ctx, playbook, "--version")
 	}
 
 	// check if playbook is provided
@@ -181,5 +182,5 @@ func setFlags(p *Playbook) *exec.Cmd {
 	logrus.Info("ansible-playbook: command created")
 
 	// ansible-playbook cli
-	return exec.Command(playbook, flags...)
+	return exec.CommandContext(ctx, playbook, flags...)
 }
