@@ -45,10 +45,15 @@ func main() {
 		Version: pluginVersion.Semantic(),
 		Flags: []cli.Flag{
 			&cli.StringFlag{
-				Name:    "log.level",
-				Value:   "info",
-				Usage:   "set log level - options: (trace|debug|info|warn|error|fatal|panic)",
-				Sources: cli.EnvVars("PARAMETER_LOG_LEVEL", "VELA_LOG_LEVEL"),
+				Name:  "log.level",
+				Value: "info",
+				Usage: "set log level - options: (trace|debug|info|warn|error|fatal|panic)",
+				Sources: cli.NewValueSourceChain(
+					cli.EnvVar("PARAMETER_LOG_LEVEL"),
+					cli.EnvVar("VELA_LOG_LEVEL"),
+					cli.File("/vela/parameters/ansible/log_level"),
+					cli.File("/vela/secrets/ansible/log_level"),
+				),
 			},
 
 			&cli.StringFlag{
